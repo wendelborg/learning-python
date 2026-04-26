@@ -131,3 +131,32 @@ Count items matching a condition using `sum()` with a generator. (`step6_compreh
 **Status:** Done
 
 Add `summary()` and "list remaining" to `Tasks` class in `main.py`.
+
+---
+
+## Step 7: Type Hints and Dataclasses
+
+### 7.1 — Convert `Task` to a dataclass
+**Status:** Done
+
+Replace manual `__init__` with `@dataclass` decorator. Keep `__str__` and `mark_done`.
+
+### 7.2 — Add type hints to all functions
+**Status:** Done
+
+Add parameter types and return types (`-> None`, `-> str`, etc.) to all functions and methods.
+
+### 7.3 — Use `asdict()` for serialization
+**Status:** Done
+
+Replace `task.__dict__` with `asdict(task)` in `save_tasks`.
+
+### 7.4 — Use `**dict` unpacking for deserialization
+**Status:** Done
+
+Replace manual Task construction with `Task(**item)` in `load_tasks`.
+
+### 7.5 — Pass mypy with no errors
+**Status:** Done
+
+Fix all type errors reported by `mypy main.py`.

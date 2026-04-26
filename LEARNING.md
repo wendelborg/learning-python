@@ -407,6 +407,82 @@ done = sum(1 for t in tasks if t.done)
 
 ---
 
+## Step 7: Type Hints and Dataclasses
+
+### Type hints
+Optional annotations — not enforced at runtime, but checked by tools like `mypy`.
+
+```csharp
+// C#
+public string Greet(string name, int times = 1) { ... }
+```
+
+```python
+# Python
+def greet(name: str, times: int = 1) -> str:
+    ...
+
+# void → None
+def mark_done(self) -> None:
+    self.done = True
+
+# Collections
+tasks: list[Task] = []
+data: dict[str, bool] = {"done": True}
+```
+
+### Dataclasses (like C# records)
+```csharp
+// C#
+public record Task(string Title, bool Done = false);
+```
+
+```python
+from dataclasses import dataclass, asdict
+
+@dataclass
+class Task:
+    title: str
+    done: bool = False
+```
+
+Auto-generates `__init__`, `__repr__`, and `__eq__`. You can still add methods.
+
+### `asdict()` — clean serialization
+Replaces `task.__dict__` for dataclasses:
+
+```python
+from dataclasses import asdict
+data = asdict(task)    # {"title": "Buy milk", "done": False}
+```
+
+### `**dict` unpacking — clean deserialization
+```python
+d = {"title": "Buy milk", "done": True}
+task = Task(**d)    # same as Task(title="Buy milk", done=True)
+```
+
+### `__post_init__` — extra constructor logic
+```python
+@dataclass
+class Task:
+    title: str
+    done: bool = False
+
+    def __post_init__(self) -> None:
+        self.title = self.title.strip()
+```
+
+### Linting and type checking
+```bash
+pip3 install mypy ruff
+mypy main.py          # type checker
+ruff check main.py    # linter
+ruff format main.py   # auto-formatter
+```
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
@@ -415,7 +491,7 @@ done = sum(1 for t in tasks if t.done)
 - [x] Step 4 — Classes, __init__, __str__, ternary
 - [x] Step 5 — File I/O, JSON, context managers, __iter__
 - [x] Step 6 — List comprehensions, generators
-- [ ] Step 7 — Type hints, dataclasses
+- [x] Step 7 — Type hints, dataclasses, mypy, ruff
 - [ ] Step 8 — Error handling, custom exceptions
 - [ ] Step 9 — Modules & packages
 - [ ] Step 10 — Virtual environments, pip
