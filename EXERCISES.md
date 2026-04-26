@@ -208,3 +208,27 @@ Move `get_int_input` helper.
 **Status:** Done
 
 Keep only menu logic and imports. Remove unused `json` and `os` imports.
+
+---
+
+## Step 10: Virtual Environments and pip
+
+### 10.1 — Create a virtual environment
+**Status:** Done
+
+Run `python3 -m venv venv`.
+
+### 10.2 — Add venv to .gitignore
+**Status:** Done
+
+Add `venv/` to `.gitignore`.
+
+### 10.3 — Install dependencies in venv
+**Status:** Done
+
+Activate venv and install `mypy` and `ruff`.
+
+### 10.4 — Generate requirements.txt
+**Status:** Done
+
+Run `pip freeze > requirements.txt`.

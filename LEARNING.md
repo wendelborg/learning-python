@@ -581,6 +581,41 @@ If `store.py` imports from `models.py` and `models.py` imports from `store.py`, 
 
 ---
 
+## Step 10: Virtual Environments and pip
+
+### Virtual environments (like per-project NuGet)
+```bash
+python3 -m venv venv         # create (once per project)
+source venv/bin/activate     # activate (per terminal session)
+deactivate                   # switch back to system Python
+```
+
+Activating changes your `PATH` so `python3`, `pip`, `mypy`, etc. resolve to the venv's copies.
+
+### pip (like NuGet CLI)
+```bash
+pip install mypy ruff            # install packages (into active venv)
+pip freeze > requirements.txt    # save dependencies (like .csproj PackageReference)
+pip install -r requirements.txt  # restore dependencies (like dotnet restore)
+```
+
+### .gitignore
+Always exclude `venv/` — like `bin/` and `obj/` in C#.
+
+### Project structure (final)
+```
+learning/
+├── .gitignore           # excludes venv/
+├── requirements.txt     # dependency list
+├── main.py              # entry point
+├── models.py            # Task dataclass
+├── store.py             # Tasks class (persistence)
+├── utils.py             # helper functions
+└── venv/                # virtual environment (not committed)
+```
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
@@ -592,4 +627,4 @@ If `store.py` imports from `models.py` and `models.py` imports from `store.py`, 
 - [x] Step 7 — Type hints, dataclasses, mypy, ruff
 - [x] Step 8 — Error handling, try/except, exception types
 - [x] Step 9 — Modules & packages
-- [ ] Step 10 — Virtual environments, pip
+- [x] Step 10 — Virtual environments, pip, requirements.txt
