@@ -166,11 +166,75 @@ Invalid input raises `ValueError` (like C#'s `FormatException`).
 
 ---
 
+## Step 3: Functions
+
+### Defining functions
+```csharp
+// C#
+public void Greet(string name, string greeting = "Hello") { ... }
+```
+
+```python
+# Python — no access modifiers, no type declarations
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+```
+
+### Keyword arguments
+```python
+greet(greeting="Hi", name="Bob")  # call by name, any order
+```
+
+### Returning multiple values
+```csharp
+// C# — need Tuple or out params
+public (int total, int done) GetStats() { ... }
+```
+
+```python
+# Python — just return a tuple, unpack at the call site
+def get_stats(tasks):
+    total = len(tasks)
+    done = sum(1 for t in tasks if t["done"])
+    return total, done
+
+total, done = get_stats(tasks)
+```
+
+### Truthiness
+Empty collections are "falsy" — no need for `.Count == 0` or `.Any()`.
+
+```python
+if not tasks:       # True when list is empty
+    print("No tasks yet.")
+    return          # early return, like C# void methods
+```
+
+Falsy values: `False`, `None`, `0`, `""`, `[]`, `{}`, `()`
+
+### No hoisting
+Functions must be defined before they're *called at runtime*. Order of definition doesn't matter if the call happens later:
+
+```python
+def main():
+    greet("Alice")   # OK — greet exists by the time main() runs
+
+def greet(name):
+    print(f"Hello, {name}!")
+
+main()               # both functions defined by now
+```
+
+### Functions without return
+Functions without `return` return `None` (similar to void → null).
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
 - [x] Step 2 — Lists, dicts, type conversion, snake_case
-- [ ] Step 3 — Functions, default args, *args/**kwargs
+- [x] Step 3 — Functions, truthiness, early return
 - [ ] Step 4 — Classes, __init__, __str__
 - [ ] Step 5 — File I/O, JSON, context managers
 - [ ] Step 6 — List comprehensions, generators
