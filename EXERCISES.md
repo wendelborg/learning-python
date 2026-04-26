@@ -103,33 +103,31 @@ Load from `tasks.json` in the `Tasks` constructor if the file exists.
 ## Step 6: List Comprehensions and Generators
 
 ### 6.1 — Basic comprehension
-**Status:** Pending
+**Status:** Done
 
 Double all numbers in a list. (`step6_comprehensions.py`)
 
 ### 6.2 — Filtered comprehension
-**Status:** Pending
+**Status:** Done
 
 Filter a list to only even numbers. (`step6_comprehensions.py`)
 
 ### 6.3 — Transform + filter
-**Status:** Pending
+**Status:** Done
 
 Double values, but only for numbers > 5. (`step6_comprehensions.py`)
 
 ### 6.4 — Strings
-**Status:** Pending
+**Status:** Done
 
 Uppercase names shorter than 5 characters. (`step6_comprehensions.py`)
 
 ### 6.5 — Counting with sum()
-**Status:** Pending
+**Status:** Done
 
 Count items matching a condition using `sum()` with a generator. (`step6_comprehensions.py`)
 
 ### 6.6 — Apply to task tracker
-**Status:** Pending
+**Status:** Done
 
 Add `summary()` and "list remaining" to `Tasks` class in `main.py`.
-
-Use `"x" if self.done else " "` instead of an if/else block.

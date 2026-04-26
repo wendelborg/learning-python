@@ -361,6 +361,52 @@ data = [task.__dict__ for task in self.tasks]
 
 ---
 
+## Step 6: List Comprehensions and Generators
+
+### Basic pattern
+```
+[expression for item in collection]
+[expression for item in collection if condition]
+```
+
+Read as: "give me `expression` for each `item` in `collection` (if `condition`)".
+
+### Comparison with LINQ
+```csharp
+// C# — chain left to right
+tasks.Where(t => t.Done).Select(t => t.Title).ToList();
+```
+
+```python
+# Python — expression first, then loop, then filter
+[t.title for t in tasks if t.done]
+```
+
+### Comprehension with enumerate (preserving index)
+```python
+# Keep original index while filtering — produces list of (index, item) tuples
+not_done = [(i, task) for i, task in enumerate(self.tasks) if not task.done]
+for i, task in not_done:
+    print(f"{i + 1}. {task}")
+```
+
+### Counting with sum() + generator
+```csharp
+// C#
+tasks.Count(t => t.Done);
+```
+
+```python
+# Python — generator expression (round parens = lazy)
+done = sum(1 for t in tasks if t.done)
+```
+
+### List vs generator
+- `[...]` = list — built in memory immediately (like `.ToList()`)
+- `(...)` = generator — lazy, one value at a time (like `IEnumerable`)
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
@@ -368,7 +414,7 @@ data = [task.__dict__ for task in self.tasks]
 - [x] Step 3 — Functions, truthiness, early return
 - [x] Step 4 — Classes, __init__, __str__, ternary
 - [x] Step 5 — File I/O, JSON, context managers, __iter__
-- [ ] Step 6 — List comprehensions, generators
+- [x] Step 6 — List comprehensions, generators
 - [ ] Step 7 — Type hints, dataclasses
 - [ ] Step 8 — Error handling, custom exceptions
 - [ ] Step 9 — Modules & packages

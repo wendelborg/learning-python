@@ -69,6 +69,19 @@ class Tasks:
                 task.done = item["done"]
                 self.tasks.append(task)
 
+    def summary(self): 
+        total = len(self.tasks)
+        done = sum(1 for task in self.tasks if task.done)
+        print(f"Summary: {total} tasks ({done} done, {total - done} remaining)")
+
+    def remaining(self):                                                                                                                                                                                                                        
+        not_done = [(i, task) for i, task in enumerate(self.tasks) if not task.done]                                                                                                                                                            
+        if not not_done:                                                                                                                                                                                                                        
+            print("Clean sheets!")                                                                                                                                                                                                              
+            return                                                                                                                                                                                                                              
+        for i, task in not_done:                                     
+            print(f"{i + 1}. {task}") 
+            
 def add_task(tasks):
     description = input("Enter task description: ")
     tasks.add_task(description)
@@ -100,10 +113,12 @@ def main():
         print("  1. Add a task")
         print("  2. List tasks")
         print("  3. Mark task as done") 
-        print("  4. Quit") 
+        print("  4. Summary") 
+        print("  5. Remaining")         
+        print("  6. Quit") 
         print()
 
-        choice = input("Enter your choice (1-4): ")
+        choice = input("Enter your choice (1-6): ")
 
         # No switch statement needed (Python 3.10+ has 'match', but if/elif is idiomatic)
         # In C#: if (choice == "1") { } else if (choice == "2") { }
@@ -114,6 +129,10 @@ def main():
         elif choice == "3":
             mark_task_done(tasks)
         elif choice == "4":
+            tasks.summary()
+        elif choice == "5":
+            tasks.remaining()
+        elif choice == "6":
             sure = input("Are you sure? (y/n): ")
             if sure.lower() == "y":                
                 print(f"Goodbye, {name}!")
