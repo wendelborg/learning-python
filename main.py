@@ -13,6 +13,13 @@ import os
 # - input() instead of Console.ReadLine()
 # - f"..." instead of $"..." for string interpolation
 
+def get_int_input(description: str) -> int:
+    while True:
+        try:
+            return int(input(description))
+        except ValueError:
+            print("That was not a valid number, try again.")
+
 @dataclass
 class Task:
     title: str
@@ -90,7 +97,7 @@ def list_tasks(tasks: Tasks):
     tasks.list_tasks()
 
 def mark_task_done(tasks: Tasks):
-    task_num = input("Enter task number to mark as done: ")
+    task_num = get_int_input("Enter task number to mark as done: ")
     try:
         tasks.mark_task_done(int(task_num))
     except ValueError:
