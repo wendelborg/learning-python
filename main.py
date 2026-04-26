@@ -1,7 +1,3 @@
-import json
-import os
-
-from models import Task
 from store import Tasks
 from utils import get_int_input
 
