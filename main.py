@@ -46,7 +46,7 @@ def main():
             print("  No tasks yet — we'll add storage next!")
         elif choice == "3":
             sure = input("Are you sure? (y/n): ")
-            if(sure).lower() == "y":                
+            if sure.lower() == "y":                
                 print(f"Goodbye, {name}!")
                 break  # same as C#
         else:
