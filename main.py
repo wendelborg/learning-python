@@ -50,7 +50,7 @@ class Tasks:
             task.mark_done()
             self.save_tasks()  
         else:
-            print("Invalid task number.")
+            print("That is not a task number.")
 
     def __iter__(self):
         return iter(self.tasks)
@@ -62,9 +62,13 @@ class Tasks:
             f.write(text)
 
     def load_tasks(self):
-        with open("tasks.json", "r") as f:
-            data = json.loads(f.read())
-            self.tasks = [Task(**item) for item in data] # Can be unpacked like this since Task is a dataclass
+        try:
+            with open("tasks.json", "r") as f:
+                data = json.loads(f.read())
+                self.tasks = [Task(**item) for item in data] # Can be unpacked like this since Task is a dataclass
+        except json.JSONDecodeError as e:
+            print("Error loading tasks:", e)
+            self.tasks = []
 
     def summary(self): 
         total = len(self.tasks)
@@ -87,7 +91,12 @@ def list_tasks(tasks: Tasks):
 
 def mark_task_done(tasks: Tasks):
     task_num = input("Enter task number to mark as done: ")
-    tasks.mark_task_done(int(task_num))
+    try:
+        tasks.mark_task_done(int(task_num))
+    except ValueError:
+        print("That was not a valid number, was it?s")
+    except IndexError:
+        print("Stay within bounds!")
 
 def main():
     print("=== Task Tracker ===")
