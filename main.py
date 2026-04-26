@@ -14,6 +14,9 @@ def add_task(tasks):
     tasks.append(task) 
 
 def list_tasks(tasks):
+    if not tasks:
+        print("No tasks added yet.")
+        return
     for i, task in enumerate(tasks):
         done = "[ ]"
         if task["done"]:
