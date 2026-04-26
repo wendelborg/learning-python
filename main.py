@@ -1,3 +1,4 @@
+from dataclasses import dataclass, asdict
 import json
 import os
 
@@ -12,10 +13,10 @@ import os
 # - input() instead of Console.ReadLine()
 # - f"..." instead of $"..." for string interpolation
 
+@dataclass
 class Task:
-    def __init__(self, title):
-        self.title = title
-        self.done = False
+    title: str
+    done: bool = False
     
     def __str__(self):
         status = "[x]" if self.done else "[ ]"
@@ -29,7 +30,7 @@ class Tasks:
         if os.path.exists("tasks.json"):
             self.load_tasks()
         else:
-            self.tasks = []
+            self.tasks: list[Task] = []
     
     def add_task(self, title):
         task = Task(title)
@@ -55,7 +56,7 @@ class Tasks:
         return iter(self.tasks)
 
     def save_tasks(self):
-        data = [task.__dict__ for task in self.tasks]
+        data = [asdict(task) for task in self.tasks]
         text = json.dumps(data, indent = 2)
         with open("tasks.json", "w") as f:
             f.write(text)
@@ -63,11 +64,7 @@ class Tasks:
     def load_tasks(self):
         with open("tasks.json", "r") as f:
             data = json.loads(f.read())
-            self.tasks = []
-            for item in data:
-                task = Task(item["title"])
-                task.done = item["done"]
-                self.tasks.append(task)
+            self.tasks = [Task(**item) for item in data] # Can be unpacked like this since Task is a dataclass
 
     def summary(self): 
         total = len(self.tasks)
@@ -81,14 +78,14 @@ class Tasks:
             return                                                                                                                                                                                                                              
         for i, task in not_done:                                     
             print(f"{i + 1}. {task}") 
-            
-def add_task(tasks):
+
+def add_task(tasks: list[Task]):
     description = input("Enter task description: ")
     tasks.add_task(description)
-def list_tasks(tasks):
+def list_tasks(tasks: list[Task]):
     tasks.list_tasks()
 
-def mark_task_done(tasks):
+def mark_task_done(tasks: list[Task]):
     task_num = input("Enter task number to mark as done: ")
     tasks.mark_task_done(int(task_num))
 
