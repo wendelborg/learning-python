@@ -160,3 +160,27 @@ Replace manual Task construction with `Task(**item)` in `load_tasks`.
 **Status:** Done
 
 Fix all type errors reported by `mypy main.py`.
+
+---
+
+## Step 8: Error Handling
+
+### 8.1 — Validate numeric input
+**Status:** Done
+
+Created `get_int_input()` helper that loops until the user enters a valid number. Catches `ValueError`.
+
+### 8.2 — Handle bounds in mark_task_done
+**Status:** Done
+
+Bounds check in `Tasks.mark_task_done` prevents invalid task numbers.
+
+### 8.3 — Handle corrupted JSON
+**Status:** Done
+
+Catch `json.JSONDecodeError` in `load_tasks`, fall back to empty list.
+
+### 8.4 — Add missing type hints and pass mypy
+**Status:** Done
+
+Added return types to all methods including `Iterator[Task]` for `__iter__`.

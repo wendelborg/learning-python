@@ -1,10 +1,14 @@
 [
   {
     "title": "Test",
-    "done": false
+    "done": true
   },
   {
     "title": "Task2",
+    "done": false
+  },
+  {
+    "title": "Another task",
     "done": false
   }
 ]

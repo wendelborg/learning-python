@@ -483,6 +483,50 @@ ruff format main.py   # auto-formatter
 
 ---
 
+## Step 8: Error Handling
+
+### try/except (like try/catch)
+```csharp
+// C#
+try { int n = int.Parse(input); }
+catch (FormatException e) { ... }
+catch (Exception e) { ... }
+finally { ... }
+```
+
+```python
+# Python
+try:
+    n = int(input("Number: "))
+except ValueError as e:       # FormatException equivalent
+    print(f"Invalid: {e}")
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    ...
+```
+
+### Common exception mapping
+| Python | C# |
+|---|---|
+| `ValueError` | `FormatException` |
+| `IndexError` | `IndexOutOfRangeException` |
+| `KeyError` | `KeyNotFoundException` |
+| `FileNotFoundError` | `FileNotFoundException` |
+| `TypeError` | `InvalidCastException` |
+| `json.JSONDecodeError` | `JsonException` |
+
+### Iterator type hints
+```python
+from collections.abc import Iterator
+
+# Like IEnumerator<Task> in C#
+def __iter__(self) -> Iterator[Task]:
+    return iter(self.tasks)
+```
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
@@ -492,6 +536,6 @@ ruff format main.py   # auto-formatter
 - [x] Step 5 — File I/O, JSON, context managers, __iter__
 - [x] Step 6 — List comprehensions, generators
 - [x] Step 7 — Type hints, dataclasses, mypy, ruff
-- [ ] Step 8 — Error handling, custom exceptions
+- [x] Step 8 — Error handling, try/except, exception types
 - [ ] Step 9 — Modules & packages
 - [ ] Step 10 — Virtual environments, pip
