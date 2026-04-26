@@ -1,3 +1,5 @@
+import json
+
 # Task Tracker - A Python learning project
 # Step 1: Basic syntax, variables, f-strings, control flow
 #
@@ -21,11 +23,34 @@ class Task:
     def mark_done(self):
         self.done = True
 
+class Tasks:
+    def __init__(self):
+        self.tasks = []
+    
+    def add_task(self, title):
+        task = Task(title)
+        self.tasks.append(task)
+    
+    def list_tasks(self):
+        if not self.tasks:
+            print("No tasks added yet.")
+            return
+        for i, task in enumerate(self.tasks):
+            print(f"{i + 1}. {task}")
+    
+    def mark_task_done(self, task_num):
+        if 0 < task_num <= len(self.tasks):
+            task = self.tasks[task_num - 1]
+            task.mark_done()
+        else:
+            print("Invalid task number.")
+
+    def __iter__(self):
+        return iter(self.tasks)
+
 def add_task(tasks):
     description = input("Enter task description: ")
-    task = Task(description)
-    tasks.append(task) 
-
+    tasks.add_task(description)
 def list_tasks(tasks):
     if not tasks:
         print("No tasks added yet.")
@@ -35,8 +60,7 @@ def list_tasks(tasks):
 
 def mark_task_done(tasks):
     task_num = input("Enter task number to mark as done: ")
-    task = tasks[int(task_num) - 1]
-    task.mark_done()
+    tasks.mark_task_done(int(task_num))
 
 def main():
     print("=== Task Tracker ===")
@@ -50,7 +74,7 @@ def main():
     print()
 
     # A counter for number of tasks added
-    tasks = []  # This will hold our tasks (we'll use it in a future step)
+    tasks = Tasks()
 
     # A simple loop - note the colon and indentation instead of braces
     # In C#: while (true) { ... }
