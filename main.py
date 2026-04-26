@@ -26,25 +26,25 @@ class Task:
         self.done = True
 
 class Tasks:
-    def __init__(self):
+    def __init__(self) -> None:
         if os.path.exists("tasks.json"):
             self.load_tasks()
         else:
             self.tasks: list[Task] = []
     
-    def add_task(self, title):
+    def add_task(self, title) -> None:
         task = Task(title)
         self.tasks.append(task)
         self.save_tasks()
     
-    def list_tasks(self):
+    def list_tasks(self) -> None:
         if not self.tasks:
             print("No tasks added yet.")
             return
         for i, task in enumerate(self.tasks):
             print(f"{i + 1}. {task}")
     
-    def mark_task_done(self, task_num):
+    def mark_task_done(self, task_num) -> None:
         if 0 < task_num <= len(self.tasks):
             task = self.tasks[task_num - 1]
             task.mark_done()
@@ -79,13 +79,13 @@ class Tasks:
         for i, task in not_done:                                     
             print(f"{i + 1}. {task}") 
 
-def add_task(tasks: list[Task]):
+def add_task(tasks: Tasks):
     description = input("Enter task description: ")
     tasks.add_task(description)
-def list_tasks(tasks: list[Task]):
+def list_tasks(tasks: Tasks):
     tasks.list_tasks()
 
-def mark_task_done(tasks: list[Task]):
+def mark_task_done(tasks: Tasks):
     task_num = input("Enter task number to mark as done: ")
     tasks.mark_task_done(int(task_num))
 
