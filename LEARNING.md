@@ -97,10 +97,79 @@ This ensures the code runs only when the file is executed directly, not when imp
 
 ---
 
+## Step 2: Lists, Dicts, and Type Conversion
+
+### Lists (like `List<T>`)
+```csharp
+// C#
+var tasks = new List<string>();
+tasks.Add("Buy milk");
+tasks.Count;
+```
+
+```python
+# Python
+tasks = []
+tasks.append("Buy milk")
+len(tasks)
+```
+
+### Dicts (like `Dictionary<K,V>` or anonymous objects)
+```csharp
+// C#
+var task = new Dictionary<string, object> { {"title", "Buy milk"}, {"done", false} };
+task["title"];
+```
+
+```python
+# Python
+task = {"title": "Buy milk", "done": False}
+task["title"]
+task["done"] = True
+```
+
+Note: Booleans are `True` / `False` (capitalized), not `true` / `false`.
+
+### Looping with index — `enumerate`
+```csharp
+// C#
+for (int i = 0; i < tasks.Count; i++) { ... }
+// or with LINQ: tasks.Select((t, i) => ...)
+```
+
+```python
+# Python
+for i, task in enumerate(tasks):
+    print(f"{i + 1}. {task['title']}")
+```
+
+### Type conversion (not casting)
+Python doesn't cast with `(int)x`. Instead, call the type as a function:
+
+```csharp
+// C#
+int num = int.Parse(Console.ReadLine());
+```
+
+```python
+# Python
+num = int(input("Enter number: "))    # string → int
+pi = float("3.14")                     # string → float
+label = str(42)                        # int → string
+```
+
+Invalid input raises `ValueError` (like C#'s `FormatException`).
+
+### Conventions
+- Python uses `snake_case` for variables and functions, not `camelCase`
+- This is defined in PEP 8, Python's official style guide
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
-- [ ] Step 2 — Lists, dicts, tuples
+- [x] Step 2 — Lists, dicts, type conversion, snake_case
 - [ ] Step 3 — Functions, default args, *args/**kwargs
 - [ ] Step 4 — Classes, __init__, __str__
 - [ ] Step 5 — File I/O, JSON, context managers

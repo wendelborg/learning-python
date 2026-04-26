@@ -34,7 +34,7 @@ def main():
         print("  4. Quit") 
         print()
 
-        choice = input("Enter your choice (1-3): ")
+        choice = input("Enter your choice (1-4): ")
 
         # No switch statement needed (Python 3.10+ has 'match', but if/elif is idiomatic)
         # In C#: if (choice == "1") { } else if (choice == "2") { }
@@ -47,12 +47,11 @@ def main():
                 done = "[ ]"
                 if task["done"]:
                     done = "[x]"
-                print(f"{done} {task['title']}")
+                print(f"{i + 1}. {done} {task['title']}")
         elif choice == "3":
-            taskNum = input("Enter task number to mark as done: ")
-            task = tasks[int(taskNum)]
+            task_num = input("Enter task number to mark as done: ")
+            task = tasks[int(task_num) - 1]
             task["done"] = True
-            # tasks[taskNum].update({"done": True})            
         elif choice == "4":
             sure = input("Are you sure? (y/n): ")
             if sure.lower() == "y":                
