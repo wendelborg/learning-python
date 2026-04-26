@@ -10,7 +10,7 @@ names = ["Alice", "Bob", "Charlie", "Dave", "Eve"]
 # Create a list of all numbers doubled
 # C#: numbers.Select(n => n * 2).ToList()
 # Your code:
-doubled = [n * 2 for n in numbers]  
+doubled = [n * 2 for n in numbers]
 
 # --- Exercise 6.2: Filtered comprehension ---
 # Create a list of only even numbers

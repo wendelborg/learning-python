@@ -12,15 +12,20 @@ from utils import get_int_input
 # - input() instead of Console.ReadLine()
 # - f"..." instead of $"..." for string interpolation
 
+
 def add_task(tasks: Tasks):
     description = input("Enter task description: ")
     tasks.add_task(description)
+
+
 def list_tasks(tasks: Tasks):
     tasks.list_tasks()
+
 
 def mark_task_done(tasks: Tasks):
     task_num = get_int_input("Enter task number to mark as done: ")
     tasks.mark_task_done(task_num)
+
 
 def main():
     print("=== Task Tracker ===")
@@ -42,10 +47,10 @@ def main():
         print("What would you like to do?")
         print("  1. Add a task")
         print("  2. List tasks")
-        print("  3. Mark task as done") 
-        print("  4. Summary") 
-        print("  5. Remaining")         
-        print("  6. Quit") 
+        print("  3. Mark task as done")
+        print("  4. Summary")
+        print("  5. Remaining")
+        print("  6. Quit")
         print()
 
         choice = input("Enter your choice (1-6): ")
@@ -64,7 +69,7 @@ def main():
             tasks.remaining()
         elif choice == "6":
             sure = input("Are you sure? (y/n): ")
-            if sure.lower() == "y":                
+            if sure.lower() == "y":
                 print(f"Goodbye, {name}!")
                 break  # same as C#
         else:
