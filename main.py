@@ -45,8 +45,10 @@ def main():
         elif choice == "2":
             print("  No tasks yet — we'll add storage next!")
         elif choice == "3":
-            print(f"Goodbye, {name}!")
-            break  # same as C#
+            sure = input("Are you sure? (y/n): ")
+            if(sure).lower() == "y":                
+                print(f"Goodbye, {name}!")
+                break  # same as C#
         else:
             print("  Invalid choice, try again.")
 
