@@ -9,6 +9,21 @@
 # - input() instead of Console.ReadLine()
 # - f"..." instead of $"..." for string interpolation
 
+def add_task(tasks):
+    task = {"title": input("Enter task description: "), "done": False}
+    tasks.append(task) 
+
+def list_tasks(tasks):
+    for i, task in enumerate(tasks):
+        done = "[ ]"
+        if task["done"]:
+            done = "[x]"
+        print(f"{i + 1}. {done} {task['title']}")
+
+def mark_task_done(tasks):
+    task_num = input("Enter task number to mark as done: ")
+    task = tasks[int(task_num) - 1]
+    task["done"] = True
 
 def main():
     print("=== Task Tracker ===")
@@ -39,19 +54,11 @@ def main():
         # No switch statement needed (Python 3.10+ has 'match', but if/elif is idiomatic)
         # In C#: if (choice == "1") { } else if (choice == "2") { }
         if choice == "1":
-            task = {"title": input("Enter task description: "), "done": False}
-            tasks.append(task) 
-            print(f'{len(tasks)} task(s) added (not saved yet — we\'ll fix that next!)')
+            add_task(tasks)
         elif choice == "2":
-            for i, task in enumerate(tasks):
-                done = "[ ]"
-                if task["done"]:
-                    done = "[x]"
-                print(f"{i + 1}. {done} {task['title']}")
+            list_tasks(tasks)
         elif choice == "3":
-            task_num = input("Enter task number to mark as done: ")
-            task = tasks[int(task_num) - 1]
-            task["done"] = True
+            mark_task_done(tasks)
         elif choice == "4":
             sure = input("Are you sure? (y/n): ")
             if sure.lower() == "y":                
