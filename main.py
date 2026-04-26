@@ -25,11 +25,11 @@ class Task:
     title: str
     done: bool = False
     
-    def __str__(self):
+    def __str__(self) -> strs:
         status = "[x]" if self.done else "[ ]"
         return f"{status} {self.title}"
     
-    def mark_done(self):
+    def mark_done(self) -> None:
         self.done = True
 
 class Tasks:
@@ -59,16 +59,16 @@ class Tasks:
         else:
             print("That is not a task number.")
 
-    def __iter__(self):
+    def __iter__(self) -> iter[Task]:
         return iter(self.tasks)
 
-    def save_tasks(self):
+    def save_tasks(self) -> None:
         data = [asdict(task) for task in self.tasks]
         text = json.dumps(data, indent = 2)
         with open("tasks.json", "w") as f:
             f.write(text)
 
-    def load_tasks(self):
+    def load_tasks(self) -> None:
         try:
             with open("tasks.json", "r") as f:
                 data = json.loads(f.read())
@@ -77,12 +77,12 @@ class Tasks:
             print("Error loading tasks:", e)
             self.tasks = []
 
-    def summary(self): 
+    def summary(self) -> None: 
         total = len(self.tasks)
         done = sum(1 for task in self.tasks if task.done)
         print(f"Summary: {total} tasks ({done} done, {total - done} remaining)")
 
-    def remaining(self):                                                                                                                                                                                                                        
+    def remaining(self) -> None:                                                                                                                                                                                                                        
         not_done = [(i, task) for i, task in enumerate(self.tasks) if not task.done]                                                                                                                                                            
         if not not_done:                                                                                                                                                                                                                        
             print("Clean sheets!")                                                                                                                                                                                                              
@@ -98,12 +98,7 @@ def list_tasks(tasks: Tasks):
 
 def mark_task_done(tasks: Tasks):
     task_num = get_int_input("Enter task number to mark as done: ")
-    try:
-        tasks.mark_task_done(int(task_num))
-    except ValueError:
-        print("That was not a valid number, was it?s")
-    except IndexError:
-        print("Stay within bounds!")
+    tasks.mark_task_done(task_num)
 
 def main():
     print("=== Task Tracker ===")
