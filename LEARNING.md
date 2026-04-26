@@ -287,13 +287,87 @@ print(f"1. {task}")      # calls task.__str__() → "1. [ ] Buy milk"
 
 ---
 
+## Step 5: File I/O, JSON, and Context Managers
+
+### Imports
+```python
+import json      # built-in JSON module
+import os        # file system operations
+```
+
+### JSON serialization
+```csharp
+// C#
+var json = JsonSerializer.Serialize(tasks);
+var tasks = JsonSerializer.Deserialize<List<Task>>(json);
+```
+
+```python
+# Python — json module works with dicts/lists, not custom classes
+text = json.dumps(data, indent=2)    # serialize (dict/list → string)
+data = json.loads(text)               # deserialize (string → dict/list)
+```
+
+Python's `json` module can't auto-serialize custom classes. Options:
+- `task.__dict__` — every object has this, returns its attributes as a dict
+- `dataclasses.asdict()` — cleaner, covered in Step 7
+
+### File I/O with `with` (like `using`)
+```csharp
+// C#
+using (var writer = new StreamWriter("tasks.json"))
+    writer.Write(json);
+```
+
+```python
+# Python — 'with' ensures the file is closed, like 'using' in C#
+with open("tasks.json", "w") as f:    # "w" = write, "r" = read
+    f.write(text)
+
+with open("tasks.json", "r") as f:
+    text = f.read()
+```
+
+### Checking file existence
+```python
+import os
+if os.path.exists("tasks.json"):
+    ...
+```
+
+### `__iter__` — making a class iterable
+```csharp
+// C#
+public class Tasks : IEnumerable<Task> { ... }
+```
+
+```python
+# Python — implement __iter__ to support for-loops
+class Tasks:
+    def __iter__(self):
+        return iter(self.tasks)
+```
+
+### List comprehensions (preview — Step 6)
+```csharp
+// C#
+var data = tasks.Select(t => t.ToDict()).ToList();
+```
+
+```python
+# Python — list comprehension
+data = [task.__dict__ for task in self.tasks]
+```
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
 - [x] Step 2 — Lists, dicts, type conversion, snake_case
 - [x] Step 3 — Functions, truthiness, early return
 - [x] Step 4 — Classes, __init__, __str__, ternary
-- [ ] Step 5 — File I/O, JSON, context managers
+- [x] Step 5 — File I/O, JSON, context managers, __iter__
 - [ ] Step 6 — List comprehensions, generators
 - [ ] Step 7 — Type hints, dataclasses
 - [ ] Step 8 — Error handling, custom exceptions

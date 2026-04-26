@@ -74,4 +74,62 @@ Replace dict access (`task["title"]`) with attribute access (`task.title`).
 ### 4.4 (Bonus) — Use a ternary expression in `__str__`
 **Status:** Done
 
+---
+
+## Step 5: File I/O, JSON, Context Managers
+
+### 5.1 — Write `save_tasks()` method
+**Status:** Done
+
+Convert Task objects to dicts using `__dict__` and write as JSON to `tasks.json`.
+
+### 5.2 — Write `load_tasks()` method
+**Status:** Done
+
+Read `tasks.json` if it exists, parse JSON, and rebuild `Task` objects from dicts.
+
+### 5.3 — Auto-save after mutations
+**Status:** Done
+
+Call `save_tasks()` after every add or mark-done.
+
+### 5.4 — Auto-load at startup
+**Status:** Done
+
+Load from `tasks.json` in the `Tasks` constructor if the file exists.
+
+---
+
+## Step 6: List Comprehensions and Generators
+
+### 6.1 — Basic comprehension
+**Status:** Pending
+
+Double all numbers in a list. (`step6_comprehensions.py`)
+
+### 6.2 — Filtered comprehension
+**Status:** Pending
+
+Filter a list to only even numbers. (`step6_comprehensions.py`)
+
+### 6.3 — Transform + filter
+**Status:** Pending
+
+Double values, but only for numbers > 5. (`step6_comprehensions.py`)
+
+### 6.4 — Strings
+**Status:** Pending
+
+Uppercase names shorter than 5 characters. (`step6_comprehensions.py`)
+
+### 6.5 — Counting with sum()
+**Status:** Pending
+
+Count items matching a condition using `sum()` with a generator. (`step6_comprehensions.py`)
+
+### 6.6 — Apply to task tracker
+**Status:** Pending
+
+Add `summary()` and "list remaining" to `Tasks` class in `main.py`.
+
 Use `"x" if self.done else " "` instead of an if/else block.
