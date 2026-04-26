@@ -21,6 +21,10 @@ def main():
     print(f"\nWelcome, {name}!")
     print()
 
+    # A counter for number of tasks added
+    task_count = 0
+
+
     # A simple loop - note the colon and indentation instead of braces
     # In C#: while (true) { ... }
     while True:
@@ -36,7 +40,8 @@ def main():
         # In C#: if (choice == "1") { } else if (choice == "2") { }
         if choice == "1":
             task = input("Enter task description: ")
-            print(f'  Added: "{task}" (not saved yet — we\'ll fix that next!)')
+            task_count += 1
+            print(f'  {task_count} task(s) added (not saved yet — we\'ll fix that next!)')
         elif choice == "2":
             print("  No tasks yet — we'll add storage next!")
         elif choice == "3":
