@@ -184,3 +184,27 @@ Catch `json.JSONDecodeError` in `load_tasks`, fall back to empty list.
 **Status:** Done
 
 Added return types to all methods including `Iterator[Task]` for `__iter__`.
+
+---
+
+## Step 9: Modules & Packages
+
+### 9.1 — Create `models.py`
+**Status:** Done
+
+Move `Task` dataclass with its imports.
+
+### 9.2 — Create `store.py`
+**Status:** Done
+
+Move `Tasks` class, importing `Task` from `models`.
+
+### 9.3 — Create `utils.py`
+**Status:** Done
+
+Move `get_int_input` helper.
+
+### 9.4 — Clean up `main.py`
+**Status:** Done
+
+Keep only menu logic and imports. Remove unused `json` and `os` imports.

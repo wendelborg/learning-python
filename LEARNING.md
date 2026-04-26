@@ -527,6 +527,60 @@ def __iter__(self) -> Iterator[Task]:
 
 ---
 
+## Step 9: Modules & Packages
+
+### Modules = files
+Every `.py` file is a module. Import from it by filename (without `.py`).
+
+```csharp
+// C#
+using Models;
+using Store;
+using static Utils;
+```
+
+```python
+# Python
+from models import Task
+from store import Tasks
+from utils import get_int_input
+```
+
+### Project structure
+```
+learning/
+├── main.py          # entry point — menu loop
+├── models.py        # Task dataclass
+├── store.py         # Tasks class (persistence)
+└── utils.py         # helper functions
+```
+
+### Import styles
+```python
+import json                    # import whole module, use as json.loads()
+from dataclasses import asdict # import specific name, use as asdict()
+from models import Task        # import from your own modules
+```
+
+### Packages (directories)
+For larger projects, group modules into directories with an `__init__.py`:
+
+```
+myapp/
+├── __init__.py      # makes this directory a package (can be empty)
+├── models.py
+└── store.py
+```
+
+```python
+from myapp.models import Task   # like C# nested namespaces
+```
+
+### Circular imports
+If `store.py` imports from `models.py` and `models.py` imports from `store.py`, Python will error. Same problem as circular references in C# projects. Fix by restructuring or using late imports.
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
@@ -537,5 +591,5 @@ def __iter__(self) -> Iterator[Task]:
 - [x] Step 6 — List comprehensions, generators
 - [x] Step 7 — Type hints, dataclasses, mypy, ruff
 - [x] Step 8 — Error handling, try/except, exception types
-- [ ] Step 9 — Modules & packages
+- [x] Step 9 — Modules & packages
 - [ ] Step 10 — Virtual environments, pip
