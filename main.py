@@ -1,4 +1,5 @@
 import json
+import os
 
 # Task Tracker - A Python learning project
 # Step 1: Basic syntax, variables, f-strings, control flow
@@ -25,11 +26,15 @@ class Task:
 
 class Tasks:
     def __init__(self):
-        self.tasks = []
+        if os.path.exists("tasks.json"):
+            self.load_tasks()
+        else:
+            self.tasks = []
     
     def add_task(self, title):
         task = Task(title)
         self.tasks.append(task)
+        self.save_tasks()
     
     def list_tasks(self):
         if not self.tasks:
@@ -42,21 +47,33 @@ class Tasks:
         if 0 < task_num <= len(self.tasks):
             task = self.tasks[task_num - 1]
             task.mark_done()
+            self.save_tasks()  
         else:
             print("Invalid task number.")
 
     def __iter__(self):
         return iter(self.tasks)
 
+    def save_tasks(self):
+        data = [task.__dict__ for task in self.tasks]
+        text = json.dumps(data, indent = 2)
+        with open("tasks.json", "w") as f:
+            f.write(text)
+
+    def load_tasks(self):
+        with open("tasks.json", "r") as f:
+            data = json.loads(f.read())
+            self.tasks = []
+            for item in data:
+                task = Task(item["title"])
+                task.done = item["done"]
+                self.tasks.append(task)
+
 def add_task(tasks):
     description = input("Enter task description: ")
     tasks.add_task(description)
 def list_tasks(tasks):
-    if not tasks:
-        print("No tasks added yet.")
-        return
-    for i, task in enumerate(tasks):
-        print(f"{i + 1}. {task}")
+    tasks.list_tasks()
 
 def mark_task_done(tasks):
     task_num = input("Enter task number to mark as done: ")
