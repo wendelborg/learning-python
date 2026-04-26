@@ -1,4 +1,5 @@
 from dataclasses import dataclass, asdict
+from collections.abc import Iterator 
 import json
 import os
 
@@ -25,7 +26,7 @@ class Task:
     title: str
     done: bool = False
     
-    def __str__(self) -> strs:
+    def __str__(self) -> str:
         status = "[x]" if self.done else "[ ]"
         return f"{status} {self.title}"
     
@@ -59,7 +60,7 @@ class Tasks:
         else:
             print("That is not a task number.")
 
-    def __iter__(self) -> iter[Task]:
+    def __iter__(self) -> Iterator[Task]:
         return iter(self.tasks)
 
     def save_tasks(self) -> None:
