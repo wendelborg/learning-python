@@ -22,8 +22,7 @@ def main():
     print()
 
     # A counter for number of tasks added
-    task_count = 0
-
+    tasks = []  # This will hold our tasks (we'll use it in a future step)
 
     # A simple loop - note the colon and indentation instead of braces
     # In C#: while (true) { ... }
@@ -31,7 +30,8 @@ def main():
         print("What would you like to do?")
         print("  1. Add a task")
         print("  2. List tasks")
-        print("  3. Quit")
+        print("  3. Mark task as done") 
+        print("  4. Quit") 
         print()
 
         choice = input("Enter your choice (1-3): ")
@@ -39,12 +39,21 @@ def main():
         # No switch statement needed (Python 3.10+ has 'match', but if/elif is idiomatic)
         # In C#: if (choice == "1") { } else if (choice == "2") { }
         if choice == "1":
-            task = input("Enter task description: ")
-            task_count += 1
-            print(f'  {task_count} task(s) added (not saved yet — we\'ll fix that next!)')
+            task = {"title": input("Enter task description: "), "done": False}
+            tasks.append(task) 
+            print(f'{len(tasks)} task(s) added (not saved yet — we\'ll fix that next!)')
         elif choice == "2":
-            print("  No tasks yet — we'll add storage next!")
+            for i, task in enumerate(tasks):
+                done = "[ ]"
+                if task["done"]:
+                    done = "[x]"
+                print(f"{done} {task['title']}")
         elif choice == "3":
+            taskNum = input("Enter task number to mark as done: ")
+            task = tasks[int(taskNum)]
+            task["done"] = True
+            # tasks[taskNum].update({"done": True})            
+        elif choice == "4":
             sure = input("Are you sure? (y/n): ")
             if sure.lower() == "y":                
                 print(f"Goodbye, {name}!")
