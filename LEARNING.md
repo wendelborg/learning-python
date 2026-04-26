@@ -230,12 +230,69 @@ Functions without `return` return `None` (similar to void → null).
 
 ---
 
+## Step 4: Classes
+
+### Defining a class
+```csharp
+// C#
+public class Task
+{
+    public string Title { get; set; }
+    public bool Done { get; set; }
+    public Task(string title) { Title = title; Done = false; }
+    public override string ToString() => $"[{(Done ? "x" : " ")}] {Title}";
+}
+```
+
+```python
+# Python
+class Task:
+    def __init__(self, title):    # constructor (__init__, not __init)
+        self.title = title         # no field declarations — just assign on self
+        self.done = False
+
+    def __str__(self):            # ToString()
+        status = "[x]" if self.done else "[ ]"
+        return f"{status} {self.title}"
+
+    def mark_done(self):
+        self.done = True
+```
+
+### Key differences from C#
+- **`self` is explicit** — first parameter on every instance method, used to access fields. Like `this` but you must write it out.
+- **`__init__`** = constructor. Called "dunder init" (double underscore).
+- **`__str__`** = `ToString()`. Called automatically by `print()` and f-strings.
+- **No access modifiers** — everything is public. Prefix with `_` for "private by convention".
+- **No property/field declarations** — assign `self.whatever` in `__init__`.
+
+### Ternary expressions
+```csharp
+// C#
+var status = done ? "[x]" : "[ ]";
+```
+
+```python
+# Python — value_if_true if condition else value_if_false
+status = "[x]" if self.done else "[ ]"
+```
+
+### __str__ and f-strings
+When you put an object in an f-string, Python calls `__str__` automatically:
+
+```python
+task = Task("Buy milk")
+print(f"1. {task}")      # calls task.__str__() → "1. [ ] Buy milk"
+```
+
+---
+
 ## Progress
 
 - [x] Step 1 — Basic syntax, variables, f-strings, control flow
 - [x] Step 2 — Lists, dicts, type conversion, snake_case
 - [x] Step 3 — Functions, truthiness, early return
-- [ ] Step 4 — Classes, __init__, __str__
+- [x] Step 4 — Classes, __init__, __str__, ternary
 - [ ] Step 5 — File I/O, JSON, context managers
 - [ ] Step 6 — List comprehensions, generators
 - [ ] Step 7 — Type hints, dataclasses

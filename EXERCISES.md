@@ -57,21 +57,21 @@ Move the mark-done logic into its own function.
 ## Step 4: Classes
 
 ### 4.1 — Create a `Task` class
-**Status:** Pending
+**Status:** Done
 
 Create a class with `__init__(self, title)` and `__str__(self)`.
 
 ### 4.2 — Add `mark_done(self)` method
-**Status:** Pending
+**Status:** Done
 
 Add a method on the class to mark the task as done.
 
 ### 4.3 — Refactor functions to use `Task` objects
-**Status:** Pending
+**Status:** Done
 
 Replace dict access (`task["title"]`) with attribute access (`task.title`).
 
 ### 4.4 (Bonus) — Use a ternary expression in `__str__`
-**Status:** Pending
+**Status:** Done
 
 Use `"x" if self.done else " "` instead of an if/else block.
