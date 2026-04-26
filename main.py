@@ -9,8 +9,21 @@
 # - input() instead of Console.ReadLine()
 # - f"..." instead of $"..." for string interpolation
 
+class Task:
+    def __init__(self, title):
+        self.title = title
+        self.done = False
+    
+    def __str__(self):
+        status = "[x]" if self.done else "[ ]"
+        return f"{status} {self.title}"
+    
+    def mark_done(self):
+        self.done = True
+
 def add_task(tasks):
-    task = {"title": input("Enter task description: "), "done": False}
+    description = input("Enter task description: ")
+    task = Task(description)
     tasks.append(task) 
 
 def list_tasks(tasks):
@@ -18,15 +31,12 @@ def list_tasks(tasks):
         print("No tasks added yet.")
         return
     for i, task in enumerate(tasks):
-        done = "[ ]"
-        if task["done"]:
-            done = "[x]"
-        print(f"{i + 1}. {done} {task['title']}")
+        print(f"{i + 1}. {task}")
 
 def mark_task_done(tasks):
     task_num = input("Enter task number to mark as done: ")
     task = tasks[int(task_num) - 1]
-    task["done"] = True
+    task.mark_done()
 
 def main():
     print("=== Task Tracker ===")
